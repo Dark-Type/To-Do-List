@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct Task: View {
+struct TaskItem: View {
     @Binding var task: TaskData
-    private var istTaskDone: Bool {
+    private var isTaskDone: Bool {
         task.isDone
     }
 
@@ -18,11 +18,11 @@ struct Task: View {
             TextField("Task", text: $task.taskName)
             Spacer()
             Toggle(isOn: $task.isDone) {
-                Text(istTaskDone ? "Done" : "")
-                    .foregroundStyle(istTaskDone ? .green : .blue)
+                Text(isTaskDone ? "Done" : "")
+                    .foregroundStyle(isTaskDone ? .green : .blue)
             }.toggleStyle(TaskCheckbox())
-
-        }.padding(.leading, 15)
-            .padding(.trailing, 15)
+        }
+        .padding(.leading, 15)
+        .padding(.trailing, 15)
     }
 }

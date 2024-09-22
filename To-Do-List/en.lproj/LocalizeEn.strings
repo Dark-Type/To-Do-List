@@ -1,0 +1,10 @@
+/* 
+  LocalizeEn.strings
+  To-Do-List
+
+  Created by dark type on 22.09.2024.
+  
+*/
+"empty_list_message" = "Your list is empty";
+"go_add_tasks_message" = "Go add some tasks!";
+"name" = "ToDo List";

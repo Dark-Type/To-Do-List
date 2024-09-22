@@ -4,36 +4,32 @@
 //
 //  Created by dark type on 11.09.2024.
 //
-
 import Foundation
-import SwiftUI
 import UniformTypeIdentifiers
 
-@Observable
-class DataManager {
+actor DataManager {
     static let shared = DataManager()
 
     private init() {}
 
-    func saveToJsonFile(tasks: [TaskData]) {
+    func saveToJsonFile(tasks: [TaskData]) async {
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let fileUrl = documentDirectoryUrl.appendingPathComponent("tasks.json")
 
         let encoder = JSONEncoder()
         do {
-            // print("Starting encoding")
             let data = try encoder.encode(tasks)
-            try data.write(to: fileUrl, options: [])
-            // print("Encoded to \(fileUrl)")
+            try data.write(to: fileUrl, options: .atomic)
+            print("Tasks successfully saved to \(fileUrl)")
         } catch {
             print("Files were not encoded properly due to \(error)")
         }
     }
 
-    func loadJsonFile() -> [TaskData]? {
+    func loadJsonFile() async -> [TaskData] {
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("Failed to get documents directory URL")
-            return nil
+            return []
         }
         let fileUrl = documentDirectoryUrl.appendingPathComponent("tasks.json")
 
@@ -45,12 +41,14 @@ class DataManager {
             return tasks
         } catch {
             print("Failed to load JSON file due to error: \(error.localizedDescription)")
-            return nil
+            return []
         }
     }
 
-    func exportJsonFile(tasks: [TaskData]) -> ExportDocument {
+    func exportJsonFile(tasks: [TaskData]) async -> ExportDocument {
         let encoder = JSONEncoder()
+        print("export tasks")
+        print(tasks)
         do {
             let data = try encoder.encode(tasks)
             let jsonString = String(data: data, encoding: .utf8) ?? ""
@@ -61,7 +59,7 @@ class DataManager {
         }
     }
 
-    func importJsonFile(from url: URL) -> [TaskData]? {
+    func importJsonFile(from url: URL) async -> [TaskData]? {
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
