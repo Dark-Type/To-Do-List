@@ -15,10 +15,10 @@ struct TaskItem: View {
 
     var body: some View {
         HStack {
-            TextField("Task", text: $task.taskName)
+            TextField("task_placeholder".localized(), text: $task.taskName)
             Spacer()
             Toggle(isOn: $task.isDone) {
-                Text(isTaskDone ? "Done" : "")
+                Text(isTaskDone ? "done_state".localized() : "")
                     .foregroundStyle(isTaskDone ? .green : .blue)
             }.toggleStyle(TaskCheckbox())
         }

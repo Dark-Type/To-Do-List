@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Localizable.xcstrings" source-language="ru" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.4" build-num="15F31d"/>
+    </header>
+    <body>
+      <trans-unit id="" xml:space="preserve">
+        <source/>
+        <target state="new"/>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <target state="new">Done</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Task" xml:space="preserve">
+        <source>Task</source>
+        <target state="new">Task</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="empty_list_message" xml:space="preserve">
+        <source>empty_list_message</source>
+        <target state="new">empty_list_message</target>
+        <note>Message shown when the list is empty</note>
+      </trans-unit>
+      <trans-unit id="go_add_tasks_message" xml:space="preserve">
+        <source>go_add_tasks_message</source>
+        <target state="new">go_add_tasks_message</target>
+        <note>Message prompting the user to add tasks</note>
+      </trans-unit>
+      <trans-unit id="name" xml:space="preserve">
+        <source>name</source>
+        <target state="new">name</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="ru.lproj/LocalizableRu.strings" source-language="ru" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.4" build-num="15F31d"/>
+    </header>
+    <body>
+      <trans-unit id="empty_list_message" xml:space="preserve">
+        <source>Ваш список пуст</source>
+        <target>Ваш список пуст</target>
+        <note>LocalizableRu.strings
+  To-Do-List
+
+  Created by dark type on 22.09.2024.</note>
+      </trans-unit>
+      <trans-unit id="go_add_tasks_message" xml:space="preserve">
+        <source>Добавьте задач!</source>
+        <target>Добавьте задач!</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="name" xml:space="preserve">
+        <source>Лист заданий</source>
+        <target>Лист заданий</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="To-Do-List-InfoPlist.xcstrings" source-language="ru" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.4" build-num="15F31d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>To-Do-List</source>
+        <target state="new">To-Do-List</target>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

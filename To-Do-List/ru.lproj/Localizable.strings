@@ -5,3 +5,8 @@
   Created by dark type on 22.09.2024.
   
 */
+"empty_list_message" = "Ваш список пуст";
+"add_tasks_message" = "Добавьте задач!";
+"name" = "Лист дел";
+"task_placeholder" = "Задание";
+"done_state" = "Готово";

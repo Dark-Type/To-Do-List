@@ -5,3 +5,8 @@
   Created by dark type on 22.09.2024.
   
 */
+"empty_list_message" = "Your list is empty";
+"add_tasks_message" = "Go add some tasks!";
+"name" = "ToDo List";
+"task_placeholder" = "Task";
+"done_state" = "Done";

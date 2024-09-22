@@ -14,7 +14,7 @@ struct TaskListView: View {
     var body: some View {
         List($items) { $item in
             TaskItem(task: $item)
-                .onChange(of: item) { oldItem, newItem in
+                .onChange(of: item) { _ in
                     viewModel.saveItems()
                 }
                 .swipeActions {

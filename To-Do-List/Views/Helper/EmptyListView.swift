@@ -11,16 +11,18 @@ struct EmptyListView: View {
     var body: some View {
         VStack {
             Spacer()
-            Label("Your list is empty", systemImage: "tray")
+
+            Label("empty_list_message".localized(), systemImage: "tray")
                 .imageScale(.large)
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
                 .padding()
-            Text("Go add some tasks!").font(.callout)
+            Text("add_tasks_message".localized()).font(.callout)
             Spacer()
         }
     }
 }
+
 #Preview {
-    EmptyListView()
+    EmptyListView().environment(\.locale, .init(identifier: "en"))
 }
