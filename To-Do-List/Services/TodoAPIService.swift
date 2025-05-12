@@ -13,6 +13,7 @@ enum TodoAPIError: Error {
     case decodingError(Error)
     case encodingError(Error)
     case networkError(Error)
+    case invalidData(String)
 }
 
 final class TodoAPIService: TodoAPIServiceProtocol {
@@ -412,8 +413,23 @@ final class TodoAPIService: TodoAPIServiceProtocol {
 
 private struct EmptyResponse: Decodable {}
 
-extension TodoAPIError {
-    static func invalidData(_ message: String) -> TodoAPIError {
-        fatalError("Implement this error case in your TodoAPIError type")
+extension TodoAPIError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "Invalid URL"
+        case .invalidResponse:
+            return "Invalid server response"
+        case .httpError(let code):
+            return "HTTP error: \(code)"
+        case .decodingError(let error):
+            return "Decoding error: \(error.localizedDescription)"
+        case .encodingError(let error):
+            return "Encoding error: \(error.localizedDescription)"
+        case .networkError(let error):
+            return "Network error: \(error.localizedDescription)"
+        case .invalidData(let message):
+            return message 
+        }
     }
 }

@@ -14,9 +14,28 @@
 		A5CEEE222DD0F7220006BDA6 /* openapi.json in Resources */ = {isa = PBXBuildFile; fileRef = A5CEEE212DD0F70A0006BDA6 /* openapi.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A54D58292DD1F4EE00E07841 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CD20662C91D5DF00A48456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5CD206D2C91D5DF00A48456;
+			remoteInfo = "To-Do-List";
+		};
+		A570BBB02DD1B424000F9EDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CD20662C91D5DF00A48456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5CD206D2C91D5DF00A48456;
+			remoteInfo = "To-Do-List";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		A53FF3C82DD109D900150FFA /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
+		A54D58232DD1F4EE00E07841 /* To-Do-ListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "To-Do-ListUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A568F5042DD0E43B00E4F32E /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		A570BBAC2DD1B424000F9EDE /* To-Do-ListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "To-Do-ListTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CD206E2C91D5DF00A48456 /* To-Do-List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To-Do-List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CD20752C91D5E000A48456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5CD20782C91D5E000A48456 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -27,13 +46,29 @@
 		A50BC78A2DD0E1F40088DB84 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
 		A50BC78B2DD0E3BA0088DB84 /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
 		A53FF3192DD1042D00150FFA /* Generated */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Generated; sourceTree = "<group>"; };
+		A54D58242DD1F4EE00E07841 /* To-Do-ListUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "To-Do-ListUITests"; sourceTree = "<group>"; };
 		A568F50A2DD0E48400E4F32E /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		A570BBAD2DD1B424000F9EDE /* To-Do-ListTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "To-Do-ListTests"; sourceTree = "<group>"; };
 		A5CEEDFC2DD0E5B00006BDA6 /* Theme */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Theme; sourceTree = "<group>"; };
 		A5CEEDFF2DD0E5E60006BDA6 /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
 		A5CEEE0F2DD0E9210006BDA6 /* Protocols */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Protocols; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A54D58202DD1F4EE00E07841 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A570BBA92DD1B424000F9EDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CD206B2C91D5DF00A48456 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				A5CD20702C91D5DF00A48456 /* To-Do-List */,
+				A570BBAD2DD1B424000F9EDE /* To-Do-ListTests */,
+				A54D58242DD1F4EE00E07841 /* To-Do-ListUITests */,
 				A5CD206F2C91D5DF00A48456 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				A5CD206E2C91D5DF00A48456 /* To-Do-List.app */,
+				A570BBAC2DD1B424000F9EDE /* To-Do-ListTests.xctest */,
+				A54D58232DD1F4EE00E07841 /* To-Do-ListUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +137,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A54D58222DD1F4EE00E07841 /* To-Do-ListUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A54D582D2DD1F4EE00E07841 /* Build configuration list for PBXNativeTarget "To-Do-ListUITests" */;
+			buildPhases = (
+				A54D581F2DD1F4EE00E07841 /* Sources */,
+				A54D58202DD1F4EE00E07841 /* Frameworks */,
+				A54D58212DD1F4EE00E07841 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A54D582A2DD1F4EE00E07841 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A54D58242DD1F4EE00E07841 /* To-Do-ListUITests */,
+			);
+			name = "To-Do-ListUITests";
+			packageProductDependencies = (
+			);
+			productName = "To-Do-ListUITests";
+			productReference = A54D58232DD1F4EE00E07841 /* To-Do-ListUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A570BBAB2DD1B424000F9EDE /* To-Do-ListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A570BBB42DD1B424000F9EDE /* Build configuration list for PBXNativeTarget "To-Do-ListTests" */;
+			buildPhases = (
+				A570BBA82DD1B424000F9EDE /* Sources */,
+				A570BBA92DD1B424000F9EDE /* Frameworks */,
+				A570BBAA2DD1B424000F9EDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A570BBB12DD1B424000F9EDE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A570BBAD2DD1B424000F9EDE /* To-Do-ListTests */,
+			);
+			name = "To-Do-ListTests";
+			packageProductDependencies = (
+			);
+			productName = "To-Do-ListTests";
+			productReference = A570BBAC2DD1B424000F9EDE /* To-Do-ListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A5CD206D2C91D5DF00A48456 /* To-Do-List */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5CD20812C91D5E000A48456 /* Build configuration list for PBXNativeTarget "To-Do-List" */;
@@ -131,9 +216,18 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					A54D58222DD1F4EE00E07841 = {
+						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
+						TestTargetID = A5CD206D2C91D5DF00A48456;
+					};
+					A570BBAB2DD1B424000F9EDE = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = A5CD206D2C91D5DF00A48456;
+					};
 					A5CD206D2C91D5DF00A48456 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -156,11 +250,27 @@
 			projectRoot = "";
 			targets = (
 				A5CD206D2C91D5DF00A48456 /* To-Do-List */,
+				A570BBAB2DD1B424000F9EDE /* To-Do-ListTests */,
+				A54D58222DD1F4EE00E07841 /* To-Do-ListUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A54D58212DD1F4EE00E07841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A570BBAA2DD1B424000F9EDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CD206C2C91D5DF00A48456 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -175,6 +285,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A54D581F2DD1F4EE00E07841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A570BBA82DD1B424000F9EDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5CD206A2C91D5DF00A48456 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,7 +309,97 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A54D582A2DD1F4EE00E07841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5CD206D2C91D5DF00A48456 /* To-Do-List */;
+			targetProxy = A54D58292DD1F4EE00E07841 /* PBXContainerItemProxy */;
+		};
+		A570BBB12DD1B424000F9EDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5CD206D2C91D5DF00A48456 /* To-Do-List */;
+			targetProxy = A570BBB02DD1B424000F9EDE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A54D582B2DD1F4EE00E07841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN79D4T9G3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "boo.To-Do-ListUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "To-Do-List";
+			};
+			name = Debug;
+		};
+		A54D582C2DD1F4EE00E07841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN79D4T9G3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "boo.To-Do-ListUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "To-Do-List";
+			};
+			name = Release;
+		};
+		A570BBB22DD1B424000F9EDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN79D4T9G3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "boo.To-Do-ListTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/To-Do-List.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/To-Do-List";
+			};
+			name = Debug;
+		};
+		A570BBB32DD1B424000F9EDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN79D4T9G3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "boo.To-Do-ListTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/To-Do-List.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/To-Do-List";
+			};
+			name = Release;
+		};
 		A5CD207F2C91D5E000A48456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -370,6 +584,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A54D582D2DD1F4EE00E07841 /* Build configuration list for PBXNativeTarget "To-Do-ListUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A54D582B2DD1F4EE00E07841 /* Debug */,
+				A54D582C2DD1F4EE00E07841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A570BBB42DD1B424000F9EDE /* Build configuration list for PBXNativeTarget "To-Do-ListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A570BBB22DD1B424000F9EDE /* Debug */,
+				A570BBB32DD1B424000F9EDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5CD20692C91D5DF00A48456 /* Build configuration list for PBXProject "To-Do-List" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

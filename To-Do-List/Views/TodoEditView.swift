@@ -172,16 +172,16 @@ struct TodoEditView: View {
         presentationMode.wrappedValue.dismiss()
     }
       
-    private func processMacros() {
+    func processMacros() {
         var newTitle = title
         var newPriority = priority
         var newDeadline = hasDeadline ? deadline : nil
-       
+
         let priorityPattern = /!([1-4])\s?/
         if let match = newTitle.firstMatch(of: priorityPattern) {
             if !priorityChangedByUser {
                 let priorityNumber = String(match.output.1)
-                       
+                        
                 switch priorityNumber {
                 case "1": newPriority = .critical
                 case "2": newPriority = .high
@@ -190,10 +190,10 @@ struct TodoEditView: View {
                 default: break
                 }
             }
-                   
+                    
             newTitle = newTitle.replacing(match.output.0, with: "")
         }
-               
+                
         let deadlinePattern = /!before\s+(\d{1,2})[.-](\d{1,2})[.-](\d{4})\s?/
         if let match = newTitle.firstMatch(of: deadlinePattern) {
             if !deadlineChangedByUser {
@@ -203,16 +203,26 @@ struct TodoEditView: View {
                    let date = createDate(day: day, month: month, year: year)
                 {
                     newDeadline = date
-                    hasDeadline = true
+                    hasDeadline = true 
                 }
             }
-                
+                    
             newTitle = newTitle.replacing(match.output.0, with: "")
         }
-               
+                
         title = newTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         priority = newPriority
-        deadline = newDeadline ?? deadline
+        
+        if newDeadline != nil {
+            deadline = newDeadline!
+        }
+        
+        // Debug output to diagnose issues
+        print("Title after processing: \(title)")
+        print("HasDeadline after processing: \(hasDeadline)")
+        if hasDeadline {
+            print("Deadline after processing: \(deadline)")
+        }
     }
     
     private func createDate(day: Int, month: Int, year: Int) -> Date? {
