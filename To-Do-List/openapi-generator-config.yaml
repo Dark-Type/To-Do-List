@@ -1,0 +1,10 @@
+generate:
+  - source: To-Do-List/openapi.json
+    module: TodoAPI
+    target: TodoAPI
+    additionalImports:
+      - Foundation
+    clientConfig:
+      requestBodyContentType: json
+      responseBodyContentType: json
+    embedOpenAPIDefinition: true

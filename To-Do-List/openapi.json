@@ -1,0 +1,493 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Todo API",
+    "description": "API for managing Todo items",
+    "contact": {
+      "name": "Dark Type",
+      "email": "skazhutin.n@mail.ru"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Todo": {
+      "get": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Gets all todo items",
+        "responses": {
+          "200": {
+            "description": "Returns the list of todos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Todo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Creates a new todo item",
+        "requestBody": {
+          "description": "The todo item to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Returns the newly created todo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the todo is null or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "If there was an internal server error"
+          }
+        }
+      }
+    },
+    "/api/Todo/sort/{criteria}": {
+      "get": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Gets todo items sorted by the specified criteria",
+        "parameters": [
+          {
+            "name": "criteria",
+            "in": "path",
+            "description": "Sorting criteria (deadline, priority, created, title, or status)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the sorted list of todos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Todo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Todo/{id}": {
+      "get": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Gets a specific todo item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the todo item",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the todo item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the todo item is not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Deletes a specific todo item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the todo item to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "If the todo was successfully deleted"
+          },
+          "404": {
+            "description": "If the todo was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Updates a specific todo item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the todo item to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated todo item data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "If the todo was successfully updated"
+          },
+          "400": {
+            "description": "If the ID doesn't match or the todo is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the todo was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Todo/complete/{id}": {
+      "put": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Marks a todo item as completed",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the todo item to mark as completed",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "If the todo was successfully marked as completed"
+          },
+          "404": {
+            "description": "If the todo was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Todo/incomplete/{id}": {
+      "put": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Marks a todo item as incomplete (active)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the todo item to mark as incomplete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "If the todo was successfully marked as incomplete"
+          },
+          "404": {
+            "description": "If the todo was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Todo/upload": {
+      "post": {
+        "tags": [
+          "Todo"
+        ],
+        "summary": "Uploads a list of todo items, replacing existing ones",
+        "requestBody": {
+          "description": "List of todo items to upload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "If the todos were successfully uploaded"
+          },
+          "400": {
+            "description": "If the request body is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Todo": {
+        "required": [
+          "priority",
+          "status",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the todo item",
+            "format": "int32",
+            "example": 1
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 4,
+            "type": "string",
+            "description": "Title of the todo item",
+            "example": "Complete final project report"
+          },
+          "description": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "Optional detailed description of the todo item",
+            "nullable": true,
+            "example": "Include all project metrics and final conclusions in the report"
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Optional deadline for the todo item",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2025-05-15T23:59:59"
+          },
+          "status": {
+            "enum": [
+              "Active",
+              "Completed",
+              "Overdue",
+              "Late"
+            ],
+            "type": "string",
+            "description": "Current status of the todo item",
+            "example": "Active"
+          },
+          "priority": {
+            "enum": [
+              "Low",
+              "Medium",
+              "High",
+              "Critical"
+            ],
+            "type": "string",
+            "description": "Priority level of the todo item",
+            "example": "Medium"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date and time when the todo item was created",
+            "format": "date-time",
+            "example": "2025-05-11T14:53:49"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "description": "Date and time when the todo item was last modified",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2025-05-11T15:30:00"
+          },
+          "isCompleted": {
+            "type": "boolean",
+            "description": "Indicates whether the todo item is completed",
+            "example": false
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a todo item"
+      }
+    }
+  }
+}
