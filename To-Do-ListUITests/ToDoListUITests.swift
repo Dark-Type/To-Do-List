@@ -15,8 +15,22 @@ final class ToDoListUITests: XCTestCase {
         app.launchArguments.append("--uitesting")
         app.launch()
     }
+
     // MARK: - Main E2E
+
     func testEndToEndScenario() throws {
+        try testCreationAndUpdatesOfRegularText()
+        try testTaskCreationWithPriorityMacro()
+        try testTaskCreationWithDeadlineMacro()
+        try testTaskCreationWithBothMacros()
+        try testTaskWithBothMacrosButExplicitPriorityAndDeadline()
+        try testSortTasksByTitle()
+        testDeleteAllTestTasks()
+    }
+
+    // MARK: - Partial tests
+    
+    func testCreationAndUpdatesOfRegularText() throws {
         openAddTaskScreen()
         enterTaskTitle("abc")
         saveTask()
@@ -35,7 +49,6 @@ final class ToDoListUITests: XCTestCase {
         let editButton = app.buttons["EditButton"]
         XCTAssertTrue(editButton.exists, "Edit button does not exist")
         editButton.tap()
-
         let newTitle = "AllChanged"
         let newDesc = "Edited description"
         let newPriority = "High"
@@ -74,38 +87,51 @@ final class ToDoListUITests: XCTestCase {
         pickDeadlineDate(endOfTheMonth)
         saveTask()
         XCTAssertTrue(app.staticTexts["Completed"].waitForExistence(timeout: 2))
+    }
 
+    func testTaskCreationWithPriorityMacro() throws {
         createTaskWithTitle("Priority macro !1")
         openTaskWithTitle("Priority macro")
         XCTAssertTrue(app.staticTexts["Priority: Critical"].exists)
         backToListIfNeeded()
+    }
 
+    func testTaskCreationWithDeadlineMacro() throws {
         createTaskWithTitle("Deadline macro !before 25.12.2025")
         openTaskWithTitle("Deadline macro")
         XCTAssertTrue(app.staticTexts["25 Dec 2025"].exists)
         backToListIfNeeded()
+    }
 
+    func testTaskCreationWithBothMacros() throws {
         createTaskWithTitle("Both macros !1 !before 01.01.2026")
         openTaskWithTitle("Both macros")
         XCTAssertTrue(app.staticTexts["Priority: Critical"].exists)
         XCTAssertTrue(app.staticTexts["1 Jan 2026"].exists)
         backToListIfNeeded()
+    }
 
+    func testTaskWithBothMacrosButExplicitPriorityAndDeadline() throws {
         openAddTaskScreen()
         enterTaskTitle("Explicit both !1 !before 02.02.2026")
         pickPriority("Low")
         setDeadline(true)
+        let endOfTheMonth = Calendar.current.date(byAdding: .day, value: 12, to: Date())!
         pickDeadlineDate(endOfTheMonth)
         saveTask()
         openTaskWithTitle("Explicit both")
         XCTAssertTrue(app.staticTexts["Priority: Low"].exists)
         XCTAssertTrue(app.staticTexts["26 May 2025"].exists)
         backToListIfNeeded()
+    }
 
+    func testSortTasksByTitle() throws {
         openSortMenu()
         selectSortOption("Title")
         XCTAssertTrue(tasksAreSortedByTitle())
+    }
 
+    func testDeleteAllTestTasks() {
         deleteTaskWithTitle("AllChanged")
         XCTAssertFalse(app.staticTexts["AllChanged"].exists)
         deleteTaskWithTitle("Explicit both")
