@@ -14,7 +14,6 @@ struct TodoRowView: View {
         viewModel.todos.first { $0.id == todoId } ?? Todo(id: todoId, title: "")
     }
        
- 
     init(todo: Todo, viewModel: TodoListViewModel) {
         self.todoId = todo.id ?? 0
         self.viewModel = viewModel
@@ -30,6 +29,11 @@ struct TodoRowView: View {
                         .font(.headline)
                         .strikethrough(viewModel.isCompleted(todo))
                         .foregroundColor(rowColor)
+                    Text("\(todo.id ?? 0)")
+                        .accessibilityIdentifier("TaskId_\(todo.title)")
+                        .font(.caption2)
+                        .foregroundColor(.clear)
+                        .padding(.zero)
                     
                     if todo.deadline != nil {
                         HStack {
@@ -78,6 +82,7 @@ struct TodoRowView: View {
                 .font(.title3)
         }
         .buttonStyle(BorderlessButtonStyle())
+        .accessibilityIdentifier("CompletionToggle_\(todo.id ?? 0)")
     }
     
     private var rowColor: Color {

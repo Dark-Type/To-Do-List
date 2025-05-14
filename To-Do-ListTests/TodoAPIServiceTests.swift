@@ -5,12 +5,6 @@
 //  Created by dark type on 12.05.2025.
 //
 
-//
-//  TodoAPIServiceTests.swift
-//  To_Do_ListTests
-//
-//  Created by tester on 12.05.2025.
-//
 
 import Foundation
 import Testing

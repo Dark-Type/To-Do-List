@@ -73,7 +73,6 @@ struct TodoListViewModelTests {
     
     @Test("Todo status update - boundary value analysis for deadline")
     func testStatusUpdate() async throws {
-        // Arrange
         let mockAPI = MockTodoAPIService()
         let mockStorage = MockTodoStorageService()
         let sut = TodoListViewModel(apiService: mockAPI, storageService: mockStorage)

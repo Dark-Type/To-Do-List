@@ -5,12 +5,6 @@
 //  Created by dark type on 12.05.2025.
 //
 
-//
-//  TodoMacroTests.swift
-//  To-Do-ListTests
-//
-//  Created by Dark-Type on 12.05.2025.
-//
 
 import SwiftUI
 import Testing

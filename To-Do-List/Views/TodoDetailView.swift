@@ -38,6 +38,7 @@ struct TodoDetailView: View {
                     Button("Edit") {
                         isEditing = true
                     }
+                    .accessibilityIdentifier("EditButton")
                 }
             })
             .sheet(isPresented: $isEditing, onDismiss: {
@@ -274,7 +275,7 @@ struct TodoDetailView: View {
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .short
+        formatter.timeStyle = .none
         return formatter.string(from: date)
     }
 }

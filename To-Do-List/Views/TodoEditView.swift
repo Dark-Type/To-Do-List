@@ -41,90 +41,191 @@ struct TodoEditView: View {
         _deadlineChangedByUser = State(initialValue: !isNewTodo && todo.wrappedValue.deadline != nil)
     }
     
+    var isUITesting: Bool {
+        ProcessInfo.processInfo.arguments.contains("--uitesting")
+    }
+
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Task Details")) {
-                    TextField("Title", text: $title)
-                    
-                    ZStack(alignment: .topLeading) {
-                        if description.isEmpty {
-                            Text("Description (Optional)")
-                                .foregroundColor(Color(.placeholderText))
-                                .padding(.top, 8)
-                                .padding(.leading, 4)
+            Group {
+                if isUITesting {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text("Task Details")
+                                .font(.headline)
+                            TextField("Title", text: $title)
+                                .textFieldStyle(.roundedBorder)
+                            
+                            ZStack(alignment: .topLeading) {
+                                if description.isEmpty {
+                                    Text("Description (Optional)")
+                                        .foregroundColor(Color(.placeholderText))
+                                        .padding(.top, 8)
+                                        .padding(.leading, 4)
+                                }
+                                TextEditor(text: $description)
+                                    .frame(minHeight: 100)
+                                    .accessibilityIdentifier("DescriptionTextEditor")
+                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3)))
+                            }
+                            
+                            Divider()
+                            
+                            Text("Priority")
+                                .font(.headline)
+                            Picker(selection: $priority, label:
+                                Label("Priority", systemImage: "flag")
+                                    .accessibilityIdentifier("PriorityPickerButton"))
+                            {
+                                ForEach(TodoPriority.allCases, id: \.self) { priority in
+                                    Label {
+                                        Text(priority.rawValue)
+                                    } icon: {
+                                        Image(systemName: priority.icon)
+                                            .foregroundColor(TodoColors.color(priority.color))
+                                    }
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .onChange(of: priority) { _ in
+                                priorityChangedByUser = true
+                                if priority == .default {
+                                    priorityChangedByUser = false
+                                }
+                            }
+                            if priority == .default {
+                                Text("Priority will be determined by title macros or set to Medium")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Divider()
+                            
+                            Text("Deadline")
+                                .font(.headline)
+                            Toggle("Set Deadline", isOn: $hasDeadline)
+                                .accessibilityIdentifier("Set Deadline")
+                                .onChange(of: hasDeadline) { newValue in
+                                    deadlineChangedByUser = true
+                                    if !newValue {
+                                        deadlineChangedByUser = false
+                                    }
+                                }
+                            if hasDeadline {
+                                DatePicker("Deadline", selection: $deadline, displayedComponents: [.date])
+                                    .accessibilityIdentifier("Deadline")
+                                    .onChange(of: deadline) { _ in
+                                        deadlineChangedByUser = true
+                                    }
+                            }
+                            
+                            Divider()
+                            
+                            Text("Pro Tips")
+                                .font(.headline)
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Automatic Priority:")
+                                    .font(.headline)
+                                Text("Add !1, !2, !3, or !4 to the title to set priority.")
+                                Text("Example: \"Submit report !1\" → Critical priority")
+                                    .font(.caption)
+                                    .italic()
+                                Divider()
+                                Text("Automatic Deadline:")
+                                    .font(.headline)
+                                Text("Add !before DD.MM.YYYY to the title to set a deadline.")
+                                Text("Example: \"Call client !before 15.05.2025\"")
+                                    .font(.caption)
+                                    .italic()
+                            }
+                            .padding(.vertical, 8)
+                            Spacer(minLength: 32)
                         }
-                        TextEditor(text: $description)
-                            .frame(minHeight: 100)
+                        .padding()
                     }
-                }
-                
-                Section(header: Text("Priority")) {
-                    Picker("Priority", selection: $priority) {
-                        ForEach(TodoPriority.allCases, id: \.self) { priority in
-                            Label {
-                                Text(priority.rawValue)
-                            } icon: {
-                                Image(systemName: priority.icon)
-                                    .foregroundColor(TodoColors.color(priority.color))
+                } else {
+                    Form {
+                        Section(header: Text("Task Details")) {
+                            TextField("Title", text: $title)
+                            
+                            ZStack(alignment: .topLeading) {
+                                if description.isEmpty {
+                                    Text("Description (Optional)")
+                                        .foregroundColor(Color(.placeholderText))
+                                        .padding(.top, 8)
+                                        .padding(.leading, 4)
+                                }
+                                TextEditor(text: $description)
+                                    .frame(minHeight: 100)
+                                    .accessibilityIdentifier("DescriptionTextEditor")
                             }
                         }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                    .onChange(of: priority) { _ in
-                    
-                        priorityChangedByUser = true
-                
-                        if priority == .default {
-                            priorityChangedByUser = false
-                        }
-                    }
-                                   
-                    if priority == .default {
-                        Text("Priority will be determined by title macros or set to Medium")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                               
-                Section(header: Text("Deadline")) {
-                    Toggle("Set Deadline", isOn: $hasDeadline)
-                        .onChange(of: hasDeadline) { newValue in
-                           
-                            deadlineChangedByUser = true
-                                           
-                            if !newValue {
-                                deadlineChangedByUser = false
+                        
+                        Section(header: Text("Priority")) {
+                            Picker(selection: $priority, label:
+                                Label("Priority", systemImage: "flag")
+                                    .accessibilityIdentifier("PriorityPickerButton"))
+                            {
+                                ForEach(TodoPriority.allCases, id: \.self) { priority in
+                                    Label {
+                                        Text(priority.rawValue)
+                                    } icon: {
+                                        Image(systemName: priority.icon)
+                                            .foregroundColor(TodoColors.color(priority.color))
+                                    }
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .onChange(of: priority) { _ in
+                                priorityChangedByUser = true
+                                if priority == .default {
+                                    priorityChangedByUser = false
+                                }
+                            }
+                            if priority == .default {
+                                Text("Priority will be determined by title macros or set to Medium")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
                             }
                         }
-                                                  
-                    if hasDeadline {
-                        DatePicker("Deadline", selection: $deadline, displayedComponents: [.date])
-                            .onChange(of: deadline) { _ in
-                                deadlineChangedByUser = true
+                        
+                        Section(header: Text("Deadline")) {
+                            Toggle("Set Deadline", isOn: $hasDeadline)
+                                .accessibilityIdentifier("Set Deadline")
+                                .onChange(of: hasDeadline) { newValue in
+                                    deadlineChangedByUser = true
+                                    if !newValue {
+                                        deadlineChangedByUser = false
+                                    }
+                                }
+                            if hasDeadline {
+                                DatePicker("Deadline", selection: $deadline, displayedComponents: [.date])
+                                    .accessibilityIdentifier("Deadline")
+                                    .onChange(of: deadline) { _ in
+                                        deadlineChangedByUser = true
+                                    }
                             }
+                        }
+                        
+                        Section(header: Text("Pro Tips")) {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Automatic Priority:")
+                                    .font(.headline)
+                                Text("Add !1, !2, !3, or !4 to the title to set priority.")
+                                Text("Example: \"Submit report !1\" → Critical priority")
+                                    .font(.caption)
+                                    .italic()
+                                Divider()
+                                Text("Automatic Deadline:")
+                                    .font(.headline)
+                                Text("Add !before DD.MM.YYYY to the title to set a deadline.")
+                                Text("Example: \"Call client !before 15.05.2025\"")
+                                    .font(.caption)
+                                    .italic()
+                            }
+                            .padding(.vertical, 8)
+                        }
                     }
-                }
-                               
-                Section(header: Text("Pro Tips")) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Automatic Priority:")
-                            .font(.headline)
-                        Text("Add !1, !2, !3, or !4 to the title to set priority.")
-                        Text("Example: \"Submit report !1\" → Critical priority")
-                            .font(.caption)
-                            .italic()
-                                       
-                        Divider()
-                                       
-                        Text("Automatic Deadline:")
-                            .font(.headline)
-                        Text("Add !before DD.MM.YYYY to the title to set a deadline.")
-                        Text("Example: \"Call client !before 15.05.2025\"")
-                            .font(.caption)
-                            .italic()
-                    }
-                    .padding(.vertical, 8)
                 }
             }
             .navigationTitle(isNewTodo ? "New Task" : "Edit Task")
@@ -134,7 +235,6 @@ struct TodoEditView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
-                               
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChanges()
@@ -165,7 +265,7 @@ struct TodoEditView: View {
              
         todo.priority = priority == .default ? .medium : priority
              
-        todo.deadline = hasDeadline ? deadline : nil
+        todo.deadline = hasDeadline ? deadline.asUTCMidnight() : nil
         todo.modifiedAt = Date()
              
         onSave(todo)
@@ -202,8 +302,8 @@ struct TodoEditView: View {
                    let year = Int(String(match.output.3)),
                    let date = createDate(day: day, month: month, year: year)
                 {
-                    newDeadline = date
-                    hasDeadline = true 
+                    newDeadline = date.asUTCMidnight()
+                    hasDeadline = true
                 }
             }
                     
@@ -230,7 +330,36 @@ struct TodoEditView: View {
         components.day = day
         components.month = month
         components.year = year
-        
-        return Calendar.current.date(from: components)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+
+        return Calendar(identifier: .gregorian).date(from: components)
+    }
+
+    func normalizedToUTCMidnight(_ date: Date) -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        var components = calendar.dateComponents(in: TimeZone(secondsFromGMT: 0)!, from: date)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.nanosecond = 0
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+        return calendar.date(from: components)!
+    }
+}
+
+extension Date {
+    /// Returns a Date at midnight UTC for the same calendar day in the user's local time zone
+    func asUTCMidnight() -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        var localComponents = calendar.dateComponents(in: TimeZone.current, from: self)
+        localComponents.hour = 0
+        localComponents.minute = 0
+        localComponents.second = 0
+        localComponents.nanosecond = 0
+        localComponents.timeZone = TimeZone(secondsFromGMT: 0)
+        return Calendar(identifier: .gregorian).date(from: localComponents)!
     }
 }
